@@ -23,6 +23,26 @@ repositories {
     mavenCentral()
 }
 
+tasks.processResources {
+    dependsOn("copyFrontendToBuild")
+}
+
+tasks.bootJar {
+    archiveFileName = "app.jar"
+}
+
+task("copyFrontendToBuild", type = Copy::class) {
+    dependsOn("npmBuild")
+    from("$projectDir/mineauth-frontend/dist/")
+    into("$buildDir/resources/main/static")
+}
+
+task("npmBuild", type = Exec::class) {
+    workingDir("mineauth-frontend/")
+    commandLine("npm.cmd", "run", "build")
+}
+
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
