@@ -28,7 +28,7 @@ tasks.processResources {
 }
 
 tasks.bootJar {
-    archiveFileName = "app.jar"
+    archiveFileName = "MineAuthServer.jar"
 }
 
 task("copyFrontendToBuild", type = Copy::class) {
