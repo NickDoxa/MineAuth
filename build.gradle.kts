@@ -39,9 +39,8 @@ task("copyFrontendToBuild", type = Copy::class) {
 
 task("npmBuild", type = Exec::class) {
     workingDir("mineauth-frontend/")
-    commandLine("npm.cmd", "run", "build")
+    commandLine("npm.cmd", "run", "build", "--port 8081")
 }
-
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
