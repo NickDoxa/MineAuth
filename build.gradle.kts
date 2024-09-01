@@ -23,23 +23,8 @@ repositories {
     mavenCentral()
 }
 
-tasks.processResources {
-    dependsOn("copyFrontendToBuild")
-}
-
 tasks.bootJar {
     archiveFileName = "MineAuthServer.jar"
-}
-
-task("copyFrontendToBuild", type = Copy::class) {
-    dependsOn("npmBuild")
-    from("$projectDir/mineauth-frontend/dist/")
-    into("$buildDir/resources/main/static")
-}
-
-task("npmBuild", type = Exec::class) {
-    workingDir("mineauth-frontend/")
-    commandLine("npm.cmd", "run", "build", "--port 8081")
 }
 
 dependencies {
