@@ -2,6 +2,7 @@ package net.oasisgames.spring.services;
 
 import lombok.RequiredArgsConstructor;
 import net.oasisgames.spring.MineAuthBackendApplication;
+import net.oasisgames.spring.dto.ExistDto;
 import net.oasisgames.spring.dto.UserDto;
 import net.oasisgames.spring.entity.Login;
 import net.oasisgames.spring.entity.User;
@@ -31,6 +32,12 @@ public class UserService {
 
     public boolean userExists(String uuid) {
         return userRepository.existsById(uuid);
+    }
+
+    public ExistDto userExistsDto(String uuid) {
+        ExistDto existDto = new ExistDto();
+        existDto.setObjExists(userExists(uuid));
+        return existDto;
     }
 
     public void removeUser(String uuid) {

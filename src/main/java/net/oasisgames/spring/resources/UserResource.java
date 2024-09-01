@@ -1,12 +1,11 @@
 package net.oasisgames.spring.resources;
 
 import lombok.RequiredArgsConstructor;
+import net.oasisgames.spring.dto.ExistDto;
 import net.oasisgames.spring.dto.UserDto;
 import net.oasisgames.spring.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +33,12 @@ public class UserResource {
     @RequestMapping("/all")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok().body(userService.getAllUsers());
+    }
+
+    @CrossOrigin
+    @GetMapping("/exists/{id}")
+    public ResponseEntity<ExistDto> userExists(@PathVariable String id) {
+        return ResponseEntity.ok().body(userService.userExistsDto(id));
     }
 
 }

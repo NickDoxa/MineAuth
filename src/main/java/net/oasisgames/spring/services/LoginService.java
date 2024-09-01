@@ -3,7 +3,7 @@ package net.oasisgames.spring.services;
 import lombok.RequiredArgsConstructor;
 import net.oasisgames.spring.MineAuthBackendApplication;
 import net.oasisgames.spring.dto.LinkDto;
-import net.oasisgames.spring.dto.LinkExistDto;
+import net.oasisgames.spring.dto.ExistDto;
 import net.oasisgames.spring.dto.LoginDto;
 import net.oasisgames.spring.dto.UserDto;
 import net.oasisgames.spring.entity.Link;
@@ -65,9 +65,9 @@ public class LoginService {
         return linkMapper.linkToLinkDto(linkRepository.getUUIDByLink(code));
     }
 
-    public LinkExistDto existsByLink(String code) {
-        LinkExistDto exists = new LinkExistDto();
-        exists.setCodeExists(linkRepository.existsByLink(code));
+    public ExistDto existsByLink(String code) {
+        ExistDto exists = new ExistDto();
+        exists.setObjExists(linkRepository.existsByLink(code));
         return exists;
     }
 

@@ -2,7 +2,7 @@ package net.oasisgames.spring.resources;
 
 import lombok.RequiredArgsConstructor;
 import net.oasisgames.spring.dto.LinkDto;
-import net.oasisgames.spring.dto.LinkExistDto;
+import net.oasisgames.spring.dto.ExistDto;
 import net.oasisgames.spring.dto.LoginDto;
 import net.oasisgames.spring.dto.UserDto;
 import net.oasisgames.spring.services.LoginService;
@@ -42,7 +42,7 @@ public class LoginResource {
 
     @CrossOrigin
     @GetMapping("/code/exists/{id}")
-    public ResponseEntity<LinkExistDto> getCodeExists(@PathVariable String id) {
+    public ResponseEntity<ExistDto> getCodeExists(@PathVariable String id) {
         return ResponseEntity.ok().body(loginService.existsByLink(id));
     }
 
