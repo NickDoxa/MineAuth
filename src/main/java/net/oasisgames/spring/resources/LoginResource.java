@@ -6,9 +6,7 @@ import net.oasisgames.spring.dto.LoginDto;
 import net.oasisgames.spring.dto.UserDto;
 import net.oasisgames.spring.services.LoginService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +23,20 @@ public class LoginResource {
     @RequestMapping("/link")
     public ResponseEntity<LinkDto> generateLink(@RequestBody UserDto userDto) {
         return ResponseEntity.ok().body(loginService.generateLinkCode(userDto));
+    }
+
+    @CrossOrigin
+    @PostMapping("/submit")
+    public ResponseEntity<LoginDto> submitUser(@RequestBody UserDto user) {
+        if (user.getUuid() == null) return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(loginService.attemptLogin(user));
+    }
+
+    @CrossOrigin
+    @GetMapping("/code/{id}")
+    public ResponseEntity<LinkDto> getLoginCode(@PathVariable String id) {
+        System.out.println(id);
+        return ResponseEntity.ok().body(loginService.getDtoFromCode(id));
     }
 
 }
