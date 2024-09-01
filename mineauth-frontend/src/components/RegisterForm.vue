@@ -47,23 +47,21 @@ async function submitCredentials() {
 </script>
 
 <template>
-  <div class="centered-container">
-    <div v-if="!submitted">
-      <h1>Register</h1>
-      <p>Create a unique username and password for server authentication.
-        Do <b>NOT</b> use your Mojang or Microsoft account credentials!</p>
-      <p><i>Registration UUID:</i> {{uuid}}</p>
-      <form @submit.prevent>
-        <label>Username</label><br>
-        <input type="text" v-model="username" placeholder="Username..."/><br><br>
-        <label>Password</label><br>
-        <input type="password" v-model="password" placeholder="Password..."/><br>
-        <button type="submit" style="margin:10px"  id="submit-btn" @click="submitCredentials"><b>Register</b></button>
-      </form>
-    </div>
-    <div v-else>
-        <LoginForm/>
-    </div>
+  <div class="centered-container" v-if="!submitted">
+    <h1>Register</h1>
+    <p>Create a unique username and password for server authentication.
+      Do <b>NOT</b> use your Mojang or Microsoft account credentials!</p>
+    <p><i>Registration UUID:</i> {{uuid}}</p>
+    <form @submit.prevent>
+      <label>Username</label><br>
+      <input type="text" v-model="username" placeholder="Username..."/><br><br>
+      <label>Password</label><br>
+      <input type="password" v-model="password" placeholder="Password..."/><br>
+      <button type="submit" style="margin:10px"  id="submit-btn" @click="submitCredentials"><b>Register</b></button>
+    </form>
+  </div>
+  <div v-else>
+    <LoginForm/>
   </div>
 </template>
 
