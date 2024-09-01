@@ -6,6 +6,9 @@ import {useRoute} from "vue-router";
 const username = ref("")
 const password = ref("")
 const uuid = ref("")
+const submitted = ref(false)
+const logged = ref(false)
+
 const route = useRoute()
 retrieveLoginCode()
 
@@ -34,39 +37,48 @@ async function submitLogin() {
   await axios.post("http://localhost:8080/api/login/submit", userDto)
       .then(async function (response) {
         const data = response.data
-        if (data.uuid === undefined) {
-          console.log("NULL RECEIVED")
-          //TODO THIS MEANS THE LINK WAS NOT ABLE TO GENERATE THEIR UUID, SEND NOT FOUND
-          return
-        }
+        if (data.uuid === undefined) return
         loginDto.uuid = data.uuid
         loginDto.loggedIn = data.loggedIn
         console.log(loginDto)
+        submitted.value = true
         if (loginDto.loggedIn) {
-           //TODO SEND SUCCESS
+          logged.value = true
           console.log("success login")
         } else {
-          //TODO SEND FAILED
+          logged.value = false
           console.log("failed login")
         }
   }).catch(function (error) {
     console.log("ERROR CAUGHT: " + error)
   })
+  console.log("submitted: " + submitted.value)
+  console.log("logged: " + logged.value)
 }
 </script>
 
 <template>
   <div class="centered-container">
-    <h1>Login</h1>
-    <form @submit.prevent>
-      <label>Username</label><br>
-      <input type="text" v-model="username" placeholder="Username..."/><br><br>
-      <label>Password</label><br>
-      <input type="password" v-model="password" placeholder="Password..."/><br>
-      <button type="submit" style="margin:10px"  id="submit-btn" @click="submitLogin"><b>Login</b></button>
-      <!-- DEBUG TESTING -->
-      <br><button @click="console.log(username + ' ' + password + ' ' + uuid)">TEST</button>
-    </form>
+    <div v-if="!submitted">
+      <h1>Login</h1>
+      <form @submit.prevent>
+        <label>Username</label><br>
+        <input type="text" v-model="username" placeholder="Username..."/><br><br>
+        <label>Password</label><br>
+        <input type="password" v-model="password" placeholder="Password..."/><br>
+        <button type="submit" style="margin:10px"  id="submit-btn" @click="submitLogin"><b>Login</b></button>
+      </form>
+    </div>
+    <div v-else>
+      <div v-if="logged">
+        <h1>Login Success</h1>
+        <p>you can now return to the game!</p>
+      </div>
+      <div v-else>
+        <h1>Login Failed</h1>
+        <p>please return to the game and perform the '/login' command again to retry!</p>
+      </div>
+    </div>
   </div>
 </template>
 
