@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class LinkExistDto {
 
-    private boolean exists;
+    private boolean codeExists;
 
 }
