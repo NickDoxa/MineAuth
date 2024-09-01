@@ -15,7 +15,7 @@ retrieveLoginCode()
 async function retrieveLoginCode() {
   await axios.get("http://localhost:8080/api/login/code/" + route.params.code)
       .then(async function (response) {
-        const data = response.data
+        const data = response.data;
         if (data.uuid !== undefined) {
           uuid.value = data.uuid
         }

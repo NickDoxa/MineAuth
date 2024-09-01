@@ -14,8 +14,8 @@ async function isValid() {
   await axios.get("http://localhost:8080/api/login/code/exists/" + route.params.code)
       .then(async function(response) {
         const data = response.data;
-        isValidLink.value = data.boolean;
-        console.log("valid: " + data.boolean);
+        isValidLink.value = data.codeExists
+        console.log("valid: " + data.codeExists)
       })
 }
 
