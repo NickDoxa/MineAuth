@@ -26,8 +26,8 @@ public class UserResource {
 
     @RequestMapping("/delete")
     public ResponseEntity<UUID> deletePlayer(@RequestBody UUID uuid) {
-        if (!userService.userExists(uuid)) return null;
-        userService.removeUser(uuid);
+        if (!userService.userExists(uuid.toString())) return null;
+        userService.removeUser(uuid.toString());
         return ResponseEntity.ok().body(uuid);
     }
 
@@ -35,6 +35,5 @@ public class UserResource {
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
-
 
 }

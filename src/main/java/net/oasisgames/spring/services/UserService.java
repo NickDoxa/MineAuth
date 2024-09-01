@@ -10,7 +10,6 @@ import net.oasisgames.spring.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -26,15 +25,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserDto getUserByUUID(UUID uuid) {
+    public UserDto getUserByUUID(String uuid) {
         return userMapper.userToUserDto(userRepository.findById(uuid).orElse(null));
     }
 
-    public boolean userExists(UUID uuid) {
+    public boolean userExists(String uuid) {
         return userRepository.existsById(uuid);
     }
 
-    public void removeUser(UUID uuid) {
+    public void removeUser(String uuid) {
         userRepository.deleteById(uuid);
     }
 
