@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
   <div class="centered-img">
     <img alt="Mine Auth Banner" src="@/assets/images/mineauth-banner.png" class="img-banner">
