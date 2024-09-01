@@ -17,4 +17,6 @@ public interface LinkRepository extends JpaRepository<Link, String> {
             nativeQuery = true)
     Link getUUIDByLink(String code);
 
+    boolean existsByLink(String link);
+
 }

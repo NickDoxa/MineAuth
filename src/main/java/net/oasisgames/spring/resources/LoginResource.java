@@ -39,4 +39,10 @@ public class LoginResource {
         return ResponseEntity.ok().body(loginService.getDtoFromCode(id));
     }
 
+    @CrossOrigin
+    @GetMapping("/code/exists/{id}")
+    public ResponseEntity<Boolean> getCodeExists(@PathVariable String id) {
+        return ResponseEntity.ok().body(loginService.existsByLink(id));
+    }
+
 }

@@ -64,4 +64,8 @@ public class LoginService {
         return linkMapper.linkToLinkDto(linkRepository.getUUIDByLink(code));
     }
 
+    public boolean existsByLink(String code) {
+        return linkRepository.existsByLink(code);
+    }
+
 }
