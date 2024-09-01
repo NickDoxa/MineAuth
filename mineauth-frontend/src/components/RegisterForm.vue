@@ -2,12 +2,12 @@
 import {ref} from "vue";
 import axios from "axios";
 import {useRoute} from "vue-router";
+import LoginForm from "@/components/LoginForm.vue";
 
 const username = ref("")
 const password = ref("")
 const uuid = ref("")
 const submitted = ref(false)
-const logged = ref(false)
 
 const route = useRoute()
 retrieveLoginCode()
@@ -24,7 +24,7 @@ async function retrieveLoginCode() {
       })
 }
 
-async function submitLogin() {
+async function submitCredentials() {
   const loginDto = {
     uuid: "",
     loggedIn: false
@@ -34,41 +34,35 @@ async function submitLogin() {
     username: username.value,
     password: password.value,
   }
-  await axios.post("http://localhost:8080/api/login/submit", userDto)
+  await axios.post("http://localhost:8080/api/user/create", userDto)
       .then(async function (response) {
         const data = response.data
         if (data.uuid === undefined) return
-        loginDto.uuid = data.uuid
-        loginDto.loggedIn = data.loggedIn
         submitted.value = true
-        logged.value = loginDto.loggedIn;
-  }).catch(function (error) {
-    console.log("ERROR CAUGHT: " + error)
-  })
+      }).catch(function (error) {
+        console.log("ERROR CAUGHT: " + error)
+      })
 }
+
 </script>
 
 <template>
   <div class="centered-container">
     <div v-if="!submitted">
-      <h1>Login</h1>
+      <h1>Register</h1>
+      <p>Create a unique username and password for server authentication.
+        Do <b>NOT</b> use your Mojang or Microsoft account credentials!</p>
+      <p><i>Registration UUID:</i> {{uuid}}</p>
       <form @submit.prevent>
         <label>Username</label><br>
         <input type="text" v-model="username" placeholder="Username..."/><br><br>
         <label>Password</label><br>
         <input type="password" v-model="password" placeholder="Password..."/><br>
-        <button type="submit" style="margin:10px"  id="submit-btn" @click="submitLogin"><b>Login</b></button>
+        <button type="submit" style="margin:10px"  id="submit-btn" @click="submitCredentials"><b>Register</b></button>
       </form>
     </div>
     <div v-else>
-      <div v-if="logged">
-        <h1>Login Success</h1>
-        <p>you can now return to the game!</p>
-      </div>
-      <div v-else>
-        <h1>Login Failed</h1>
-        <p>please return to the game and perform the '/login' command again to retry!</p>
-      </div>
+        <LoginForm/>
     </div>
   </div>
 </template>
