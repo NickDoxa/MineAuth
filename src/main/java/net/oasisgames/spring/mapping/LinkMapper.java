@@ -1,7 +1,7 @@
 package net.oasisgames.spring.mapping;
 
 import net.oasisgames.spring.dto.LinkDto;
-import net.oasisgames.spring.entity.LinkGen;
+import net.oasisgames.spring.entity.Link;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -10,10 +10,10 @@ public interface LinkMapper {
 
     @Mapping(target = "uuid")
     @Mapping(target = "link")
-    LinkDto linkGenToLinkDto(LinkGen link);
+    LinkDto linkToLinkDto(Link link);
 
     @Mapping(target = "uuid")
     @Mapping(target = "link")
-    LinkGen linkDtoToLinkGen(LinkDto link);
+    Link linkDtoToLink(LinkDto linkDto);
 
 }
