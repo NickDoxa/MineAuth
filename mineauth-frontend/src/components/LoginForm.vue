@@ -15,9 +15,9 @@ retrieveLoginCode()
 async function retrieveLoginCode() {
   await axios.get("http://localhost:8080/api/login/code/" + route.params.code)
       .then(async function (response) {
-        const data = response.data;
+        const data = response.data
         if (data.uuid !== undefined) {
-          uuid.value = data.uuid;
+          uuid.value = data.uuid
         }
       }).catch(error => {
         console.log("ERROR CAUGHT: " + error)
@@ -42,18 +42,10 @@ async function submitLogin() {
         loginDto.loggedIn = data.loggedIn
         console.log(loginDto)
         submitted.value = true
-        if (loginDto.loggedIn) {
-          logged.value = true
-          console.log("success login")
-        } else {
-          logged.value = false
-          console.log("failed login")
-        }
+        logged.value = loginDto.loggedIn;
   }).catch(function (error) {
     console.log("ERROR CAUGHT: " + error)
   })
-  console.log("submitted: " + submitted.value)
-  console.log("logged: " + logged.value)
 }
 </script>
 
