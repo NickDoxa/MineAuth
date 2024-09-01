@@ -17,6 +17,7 @@ public class UserResource {
 
     private final UserService userService;
 
+    @CrossOrigin
     @RequestMapping("/create")
     public ResponseEntity<UserDto> createPlayer(@RequestBody UserDto userDto) {
         userService.createUser(userDto);
