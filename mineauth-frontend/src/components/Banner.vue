@@ -6,7 +6,7 @@
 
 <style scoped>
 .img-banner {
-  width: 40%;
+  width: 35%;
   height: auto;
 }
 

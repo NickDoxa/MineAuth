@@ -6,6 +6,7 @@ import {ref} from "vue";
 import axios from "axios";
 import {useRoute} from "vue-router";
 import RegisterForm from "@/components/RegisterForm.vue";
+import ServerBanner from "@/components/ServerBanner.vue";
 
 const route = useRoute()
 const isValidLink = ref(true)
@@ -50,6 +51,7 @@ async function checkUUID() {
     <div v-else>
       <RegisterForm/>
     </div>
+    <ServerBanner/>
   </div>
   <div v-else>
     <NotFound/>

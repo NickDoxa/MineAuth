@@ -1,5 +1,6 @@
 <script setup>
 import Banner from "@/components/Banner.vue";
+import ServerBanner from "@/components/ServerBanner.vue";
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import Banner from "@/components/Banner.vue";
     <h1>Invalid Link!</h1>
     <p>Your login link is invalid. Please log into the server and use '/login' to get your unique login link!</p>
   </div>
+  <ServerBanner/>
 </template>
 
 <style scoped>
