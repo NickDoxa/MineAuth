@@ -46,7 +46,7 @@ async function checkUUID() {
   <div v-if="isValidLink">
     <Banner/>
     <div v-if="isValidUUID">
-      <LoginForm/>
+      <LoginForm :uuid="uuid"/>
     </div>
     <div v-else>
       <RegisterForm/>

@@ -1,31 +1,14 @@
 <script setup>
 import {ref} from "vue";
 import axios from "axios";
-import {useRoute} from "vue-router";
 import UserProfile from "@/components/UserProfile.vue";
+
+const props = defineProps(['uuid'])
 
 const username = ref("")
 const password = ref("")
-const uuid = ref("")
 const submitted = ref(false)
 const logged = ref(false)
-
-const route = useRoute()
-retrieveLoginCode()
-
-async function retrieveLoginCode() {
-  await axios.get("http://localhost:8080/api/login/code/" + route.params.code)
-      .then(async function (response) {
-        const data = response.data;
-        if (data.uuid !== undefined) {
-          uuid.value = data.uuid
-        }
-        return uuid.value
-      }).catch(error => {
-        console.log("ERROR CAUGHT: " + error)
-        return null
-      })
-}
 
 async function submitLogin() {
   const loginDto = {
@@ -33,7 +16,7 @@ async function submitLogin() {
     loggedIn: false
   }
   const userDto = {
-    uuid: uuid.value,
+    uuid: props.uuid,
     username: username.value,
     password: password.value,
   }
