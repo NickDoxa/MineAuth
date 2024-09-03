@@ -2,6 +2,7 @@
 import {ref} from "vue";
 import axios from "axios";
 import {useRoute} from "vue-router";
+import UserProfile from "@/components/UserProfile.vue";
 
 const username = ref("")
 const password = ref("")
@@ -19,8 +20,10 @@ async function retrieveLoginCode() {
         if (data.uuid !== undefined) {
           uuid.value = data.uuid
         }
+        return uuid.value
       }).catch(error => {
         console.log("ERROR CAUGHT: " + error)
+        return null
       })
 }
 
@@ -64,6 +67,8 @@ async function submitLogin() {
       <div v-if="logged">
         <h1>Login Success</h1>
         <p>you can now return to the game!</p>
+        <h3>User:</h3>
+        <UserProfile :uuid="uuid"/>
       </div>
       <div v-else>
         <h1>Login Failed</h1>
