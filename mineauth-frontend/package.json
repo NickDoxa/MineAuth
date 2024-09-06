@@ -1,11 +1,12 @@
 {
   "name": "mineauth-frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --port 8081",
-    "build": "vue-cli-service build",
+    "build": "vite build",
+    "vue-cli-build": "vue-cli-service build --dest build",
     "preview": "vite preview",
     "serve": "vue-cli-service serve --port 8081"
   },

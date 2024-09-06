@@ -16,7 +16,7 @@ checkLink()
 checkUUID()
 
 async function checkLink() {
-  await axios.get("http://localhost:8080/api/login/code/exists/" + route.params.code)
+  await axios.get("/api/login/code/exists/" + route.params.code)
       .then(async function(response) {
         const data = response.data;
         isValidLink.value = data.objExists
@@ -24,7 +24,7 @@ async function checkLink() {
 }
 
 async function checkUUID() {
-  await axios.get("http://localhost:8080/api/login/code/" + route.params.code)
+  await axios.get("/api/login/code/" + route.params.code)
       .then(async function (response) {
         const data = response.data;
         if (data.uuid !== undefined) {
@@ -33,7 +33,7 @@ async function checkUUID() {
       }).catch(error => {
         console.log("ERROR CAUGHT: " + error)
       })
-  await axios.get("http://localhost:8080/api/user/exists/" + uuid.value)
+  await axios.get("/api/user/exists/" + uuid.value)
       .then(async function(response) {
         const data = response.data;
         isValidUUID.value = data.objExists
@@ -49,7 +49,7 @@ async function checkUUID() {
       <LoginForm :uuid="uuid"/>
     </div>
     <div v-else>
-      <RegisterForm/>
+      <RegisterForm :uuid="uuid"/>
     </div>
     <ServerBanner/>
   </div>

@@ -11,23 +11,17 @@ const submitted = ref(false)
 const logged = ref(false)
 
 async function submitLogin() {
-  const loginDto = {
-    uuid: "",
-    loggedIn: false
-  }
   const userDto = {
     uuid: props.uuid,
     username: username.value,
     password: password.value,
   }
-  await axios.post("http://localhost:8080/api/login/submit", userDto)
+  await axios.post( "/api/login/submit", userDto)
       .then(async function (response) {
         const data = response.data
         if (data.uuid === undefined) return
-        loginDto.uuid = data.uuid
-        loginDto.loggedIn = data.loggedIn
         submitted.value = true
-        logged.value = loginDto.loggedIn;
+        logged.value = data.loggedIn;
   }).catch(function (error) {
     console.log("ERROR CAUGHT: " + error)
   })

@@ -8,7 +8,7 @@ const imageUrl = ref("")
 getServerBanner()
 
 async function getServerBanner() {
-  await axios.get("http://localhost:8080/api/images/banner")
+  await axios.get("/api/images/banner")
       .then(async function (response) {
         const data = response.data;
         if (data.url !== undefined) {

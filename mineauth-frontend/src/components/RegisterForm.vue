@@ -1,40 +1,21 @@
 <script setup>
 import {ref} from "vue";
 import axios from "axios";
-import {useRoute} from "vue-router";
 import LoginForm from "@/components/LoginForm.vue";
+
+const props = defineProps(['uuid'])
 
 const username = ref("")
 const password = ref("")
-const uuid = ref("")
 const submitted = ref(false)
 
-const route = useRoute()
-retrieveLoginCode()
-
-async function retrieveLoginCode() {
-  await axios.get("http://localhost:8080/api/login/code/" + route.params.code)
-      .then(async function (response) {
-        const data = response.data;
-        if (data.uuid !== undefined) {
-          uuid.value = data.uuid
-        }
-      }).catch(error => {
-        console.log("ERROR CAUGHT: " + error)
-      })
-}
-
 async function submitCredentials() {
-  const loginDto = {
-    uuid: "",
-    loggedIn: false
-  }
   const userDto = {
-    uuid: uuid.value,
+    uuid: props.uuid,
     username: username.value,
     password: password.value,
   }
-  await axios.post("http://localhost:8080/api/user/create", userDto)
+  await axios.post("/api/user/create", userDto)
       .then(async function (response) {
         const data = response.data
         if (data.uuid === undefined) return
@@ -51,7 +32,7 @@ async function submitCredentials() {
     <h1>Register</h1>
     <p>Create a unique username and password for server authentication.
       Do <b>NOT</b> use your Mojang or Microsoft account credentials!</p>
-    <p><i>Registration UUID:</i> {{uuid}}</p>
+    <p><i>Registration UUID:</i> {{props.uuid}}</p>
     <form @submit.prevent>
       <label>Username</label><br>
       <input type="text" v-model="username" placeholder="Username..."/><br><br>
@@ -61,7 +42,7 @@ async function submitCredentials() {
     </form>
   </div>
   <div v-else>
-    <LoginForm/>
+    <LoginForm :uuid="props.uuid"/>
   </div>
 </template>
 

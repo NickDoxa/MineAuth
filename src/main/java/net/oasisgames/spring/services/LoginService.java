@@ -43,7 +43,7 @@ public class LoginService {
         String output;
         Random random = new Random();
         do {
-            output = uuid.substring(0, 4) + String.format("%04d", random.nextInt(10000));
+            output = String.format("%08d", random.nextInt(100000000));
         } while (linkRepository.getAllLinks().contains(output));
         return output;
     }

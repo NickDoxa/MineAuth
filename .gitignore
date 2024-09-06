@@ -3,6 +3,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+.gitignore
+.git
 
 ### STS ###
 .apt_generated
@@ -34,3 +36,11 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### OTHER ###
+/mineauth-frontend/dist
+/mineauth-frontend/build
+/mineauth-frontend/node_modules
+/src/main/resources/static
+/src/main/resources/templates
+/src/main/webapp
